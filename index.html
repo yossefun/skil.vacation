@@ -1,337 +1,477 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="pageTitle">תאילנד המשפחתית 2026</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #0284c7;
-      --primary-dark: #0369a1;
-      --accent: #f59e0b;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --danger: #ef4444;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Rubik', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 60px; direction: rtl; }
-
-    /* User Banner */
-    .user-banner { background: #0f172a; color: white; padding: 8px 15px; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .user-banner button { background: var(--accent); border: none; padding: 4px 10px; border-radius: 6px; font-weight: bold; cursor: pointer; width: auto; font-size: 0.85rem; color: #000; }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(135deg, rgba(2, 132, 199, 0.85), rgba(15, 118, 110, 0.85)), 
-                  url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80') center/cover;
-      color: white; text-align: center; padding: 40px 20px;
-      border-bottom-left-radius: 24px; border-bottom-right-radius: 24px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); margin-bottom: 24px;
-    }
-    .hero h1 { font-size: 2.3rem; font-weight: 700; margin-bottom: 8px; }
-    .hero p { font-size: 1.1rem; opacity: 0.95; }
-    .badge { display: inline-block; background: var(--accent); color: #000; font-weight: 700; padding: 6px 18px; border-radius: 20px; margin-top: 16px; font-size: 0.9rem; }
-
-    .container { max-width: 950px; margin: 0 auto; padding: 0 15px; }
-
-    /* Navigation Tabs */
-    .nav-tabs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 24px; border-bottom: 2px solid var(--border); }
-    .tab-btn { background: var(--card); border: 1px solid var(--border); color: var(--text-muted); padding: 10px 16px; border-radius: 12px 12px 0 0; cursor: pointer; font-weight: 500; white-space: nowrap; transition: 0.2s; font-size: 0.9rem; }
-    .tab-btn:hover { background: #f1f5f9; color: var(--text); }
-    .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: 700; }
-
-    .sub-tab-btn { background: #e0f2fe; border: 1px solid var(--primary); color: var(--primary-dark); padding: 6px 14px; border-radius: 15px; cursor: pointer; font-weight: bold; margin-left: 5px; margin-bottom: 8px; }
-    .sub-tab-btn.active { background: var(--primary); color: white; }
-
-    .section-block { display: none; background: var(--card); padding: 24px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid var(--border); }
-    .section-block.active { display: block; }
-    .section-title { font-size: 1.4rem; color: var(--primary-dark); margin: 24px 0 16px 0; border-right: 4px solid var(--primary); padding-right: 10px; }
-
-    /* Tables & Timeline */
-    .table-container { overflow-x: auto; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 24px; border: 1px solid var(--border); }
-    table { width: 100%; border-collapse: collapse; background: var(--card); }
-    th, td { padding: 14px 16px; text-align: right; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
-    th { background: #e0f2fe; color: var(--primary-dark); font-weight: 700; white-space: nowrap; }
-    tr:last-child td { border-bottom: none; }
-
-    .timeline { display: flex; flex-direction: column; gap: 12px; }
-    .timeline-card { background: var(--card); border-radius: 12px; padding: 16px 20px; border-right: 4px solid var(--accent); box-shadow: 0 2px 4px rgba(0,0,0,0.03); border: 1px solid var(--border); }
-
-    .checklist-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-    .checklist-item { display: flex; align-items: center; gap: 12px; background: var(--card); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 0.95rem; }
-    .checklist-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
-
-    .flex-grid { display: flex; gap: 15px; flex-wrap: wrap; }
-    .card-box { flex: 1; min-width: 280px; background: #f8fafc; padding: 18px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 15px; }
-    input, select, textarea, button { width: 100%; padding: 10px 14px; margin-top: 6px; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; }
-    button.btn-main { background: var(--primary); color: white; font-weight: bold; border: none; cursor: pointer; transition: 0.2s; }
-    button.btn-main:hover { background: var(--primary-dark); }
-    .btn-danger { background: var(--danger); color: white; border: none; padding: 4px 10px; border-radius: 6px; cursor: pointer; width: auto; font-size: 0.85rem; }
-    .btn-move { background: #e0f2fe; border: 1px solid var(--border); color: var(--primary-dark); padding: 4px 8px; border-radius: 6px; cursor: pointer; width: auto; font-size: 0.85rem; }
-    .link-btn { display: inline-block; padding: 4px 10px; background: #e0f2fe; color: var(--primary-dark); border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; margin-left: 5px; }
-    .link-btn:hover { background: var(--primary); color: white; }
-
-    .date-selector { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 15px; }
-    .date-chip { padding: 8px 14px; background: #e0f2fe; color: var(--primary-dark); border-radius: 20px; cursor: pointer; font-size: 0.9rem; white-space: nowrap; font-weight: 500; }
-    .date-chip.active { background: var(--primary); color: white; font-weight: bold; }
-
-    #userModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
-    .modal-content { background: white; padding: 30px; border-radius: 16px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-    .user-select-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; background: #e0f2fe; color: var(--primary-dark); border: 1px solid var(--primary); border-radius: 10px; font-weight: bold; font-size: 1.05rem; cursor: pointer; }
-    .user-select-btn:hover { background: var(--primary); color: white; }
-
-    .footer { background: #1e293b; color: white; border-radius: 16px; padding: 24px; margin-top: 40px; text-align: center; }
-    .footer a { color: #38bdf8; text-decoration: none; font-weight: bold; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">טיול משפחתי לתאילנד 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --accent: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        header h1 { margin: 0 0 0.5rem 0; font-size: 2.2rem; }
+        header p { margin: 0; font-size: 1.1rem; opacity: 0.9; }
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            background: white;
+            padding: 0.5rem;
+            gap: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { background: #f1f5f9; color: var(--primary); }
+        .tab-btn.active { background: var(--primary); color: white; }
+        main { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .section-block { display: none; background: var(--card-bg); border-radius: 12px; padding: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .section-block.active { display: block; }
+        .sub-tab-btn {
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .sub-tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .date-chips-container { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .date-chip {
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .date-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 0.75rem; text-align: right; border-bottom: 1px solid var(--border); }
+        th { background: #f8fafc; font-weight: 700; color: var(--primary-dark); }
+        input, select, textarea {
+            font-family: 'Heebo', sans-serif;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        button.action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 500;
+        }
+        button.action-btn:hover { background: var(--primary-dark); }
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .btn-danger:hover { background: #dc2626; }
+        .link-btn {
+            display: inline-block;
+            background: #e0f2fe;
+            color: var(--primary-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white; padding: 2rem; border-radius: 12px; width: 90%; max-width: 400px; text-align: center;
+        }
+        .user-select-btn {
+            display: block; width: 100%; padding: 0.75rem; margin: 0.5rem 0;
+            background: #f1f5f9; border: 1px solid var(--border); border-radius: 8px;
+            cursor: pointer; font-family: 'Heebo', sans-serif; font-size: 1rem; font-weight: bold;
+        }
+        .user-select-btn:hover { background: var(--primary); color: white; }
+        .checklist-item {
+            display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9;
+        }
+        .timeline-card {
+            background: #f8fafc; border-right: 4px solid var(--primary); padding: 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Device User Banner -->
-  <div class="user-banner">
-    <div>👤 מכשיר זה מזוהה עבור: <strong id="currentDeviceUserLabel">לא הוגדר</strong></div>
-    <button onclick="openUserModal()">החלף משתמש</button>
-  </div>
-
-  <!-- User Selection Modal -->
-  <div id="userModal" style="display:none;">
-    <div class="modal-content">
-      <h2>מי משתמש במכשיר זה?</h2>
-      <div id="modalUsersList"></div>
+<header>
+    <div id="heroBadge" class="badge">תאילנד הקסומה 🌴</div>
+    <h1 id="heroTitle">טיול משפחתי לתאילנד</h1>
+    <p id="heroSubtitle">יוסף, שירן, הבן (16) והבת (14) | פוקט ➔ בנגקוק | 10–24 בנובמבר 2026</p>
+    <div style="margin-top: 1rem; font-size: 0.9rem;">
+        👤 משתמש נוכחי במכשיר: <strong id="currentDeviceUserLabel" style="color: var(--accent);">טוען...</strong> 
+        <button onclick="openUserModal()" style="background: none; border: 1px solid white; color: white; padding: 2px 8px; border-radius: 4px; cursor: pointer; margin-right: 10px; font-size: 0.8rem;">שנה משתמש</button>
     </div>
-  </div>
+</header>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <h1 id="heroTitle"></h1>
-    <p id="heroSubtitle"></p>
-    <div class="badge" id="heroBadge"></div>
-  </header>
+<nav class="nav-tabs">
+    <button class="tab-btn active" onclick="showTab('overview', this)">📋 סקירה כללית</button>
+    <button class="tab-btn" onclick="showTab('schedule', this)">📅 לוח זמנים יומי</button>
+    <button class="tab-btn" onclick="showTab('attractions', this)">🌟 אטרקציות ופעילויות</button>
+    <button class="tab-btn" onclick="showTab('map', this)">🗺️ מפות ואזורים</button>
+    <button class="tab-btn" onclick="showTab('expenses', this)">💰 ניהול הוצאות</button>
+    <button class="tab-btn" onclick="showTab('documents', this)">📁 מסמכים ואישורים</button>
+    <button class="tab-btn" onclick="showTab('packing', this)">🧳 רשימת ציוד</button>
+    <button class="tab-btn" onclick="showTab('bucket', this)">🎯 באקט ליסט</button>
+</nav>
 
-  <div class="container">
-    <!-- Navigation Tabs -->
-    <div class="nav-tabs" id="navTabsContainer">
-        <button class="tab-btn active" onclick="showTab('quick-info', this)">📌 מידע מהיר</button>
-        <button class="tab-btn" onclick="showTab('itinerary', this)">📅 לוח זמנים</button>
-        <button class="tab-btn" onclick="showTab('attractions', this)">🎡 אטרקציות</button>
-        <button class="tab-btn" onclick="showTab('map', this)">🗺️ מפה מרכזית</button>
-        <button class="tab-btn" onclick="showTab('expenses', this)">💰 הוצאות</button>
-        <button class="tab-btn" onclick="showTab('documents', this)">📁 מסמכים וקבלות</button>
-        <button class="tab-btn" onclick="showTab('packing', this)">🧳 ציוד</button>
-        <button class="tab-btn" onclick="showTab('bucket', this)">⭐ חלומות</button>
-    </div>
-
-    <!-- QUICK INFO TAB -->
-    <div id="quick-info" class="section-block active" style="padding:0; background:transparent; border:none; box-shadow:none;">
-        <h2 class="section-title" style="margin-top:0;">מידע מהיר ופרטי טיסות ומלונות</h2>
-        <div class="table-container">
-          <table>
-            <thead><tr><th>נושא</th><th>פרטים</th><th>הערות ואישורים</th></tr></thead>
+<main>
+    <!-- סקירה כללית -->
+    <div id="overview" class="section-block active">
+        <h2>סקירת הטיול והכנות</h2>
+        <p>ברוכים הבאים למרכז השליטה המשפחתי לטיול בתאילנד 2026!</p>
+        
+        <h3>מידע מהיר</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>נושא</th>
+                    <th>פרטים</th>
+                    <th>הערות</th>
+                </tr>
+            </thead>
             <tbody id="quickInfoTableBody"></tbody>
-          </table>
-        </div>
+        </table>
 
-        <h2 class="section-title">תוכנית הטיול המשפחתית</h2>
-        <div class="timeline" id="overviewTimeline"></div>
+        <h3 style="margin-top: 2rem;">צ'ק-ליסט הכנות מהיר</h3>
+        <div id="quickChecklistGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;"></div>
 
-        <h2 class="section-title">ציוד וארגון מוקדם</h2>
-        <div class="checklist-grid" id="quickChecklistGrid"></div>
-
-        <footer class="footer" id="footerContainer"></footer>
+        <h3 style="margin-top: 2rem;">ציר זמן כללי לטיול</h3>
+        <div id="overviewTimeline" style="margin-top: 1rem;"></div>
     </div>
 
-    <!-- ITINERARY TAB -->
-    <div id="itinerary" class="section-block">
-        <h2 class="section-title" style="margin-top:0;" id="itineraryTitle">📅 לוח זמנים יומי ויומן מסע</h2>
-        <div class="date-selector" id="dateChips"></div>
-        <div id="dayContent" class="card-box" style="margin-bottom: 20px;"></div>
+    <!-- לוח זמנים יומי -->
+    <div id="schedule" class="section-block">
+        <h2>לוח זמנים יומי</h2>
+        <div id="dateChips" class="date-chips-container"></div>
+        
+        <div id="dayContent" style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);"></div>
 
-        <!-- אזור מסמכים משויכים ליום זה -->
-        <div class="card-box" style="background: #fdf4ff; border-color: #f5d0fe; margin-bottom: 20px;">
-            <h3 style="color: #86198f; margin-bottom: 10px;">📁 אישורים, מלונות וקבלות לתאריך זה</h3>
-            <div id="dayDocumentsList" style="display: flex; flex-direction: column; gap: 8px;"></div>
+        <div style="margin-top: 2rem; background: #f0fdf4; padding: 1.5rem; border-radius: 8px; border: 1px solid #bbf7d0;">
+            <h3>📝 יומן מסע ורשמים (<span id="journalAuthorDisplay">אורח</span>)</h3>
+            <textarea id="journalText" placeholder="כתוב את רשמי היום, חוויות, או זיכרונות משפחתיים..." rows="3"></textarea>
+            <button class="action-btn" onclick="addJournalEntry()">הוסף רשומה ליומן</button>
+            <div id="journalEntriesList" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 10px;"></div>
         </div>
 
-        <div class="card-box" style="background: #f0fdf4; border-color: #bbf7d0; margin-bottom: 20px;">
-            <h3 style="color: #166534; margin-bottom: 10px;">📖 יומן המסע המשפחתי</h3>
-            <label style="font-size: 0.9rem; color: #166534;">כתיבת רשמים (מאת: <strong id="journalAuthorDisplay">משתמש</strong>):</label>
-            <textarea id="journalText" placeholder="איך היה היום... חוויות, טיפים ותמונות מהשטח" rows="3"></textarea>
-            <button class="btn-main" style="background: #16a34a;" onclick="addJournalEntry()">הוסף רשמים ליומן המסע</button>
-            <div id="journalEntriesList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;"></div>
-        </div>
-
-        <div class="card-box" style="background: var(--card);">
-            <h3>➕ הוספת אירוע / תזכורת ליום הנבחר</h3>
-            <div class="flex-grid">
-                <div style="flex:1;">
-                    <input type="text" id="eventTitle" placeholder="תיאור האירוע">
+        <div style="margin-top: 2rem; background: #fff; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+            <h3>➕ הוסף אירוע/פעילות ליום זה</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div>
+                    <label>כותרת האירוע</label>
+                    <input type="text" id="eventTitle" placeholder="למשל: שייט באיים">
+                </div>
+                <div>
+                    <label>סוג פעילות</label>
                     <select id="eventType">
-                        <option value="✈️ טיסה">✈️ טיסה</option>
+                        <option value="✈️ טיסה/העברה">✈️ טיסה/העברה</option>
                         <option value="🏨 מלון">🏨 מלון</option>
-                        <option value="🎡 אטרקציה">🎡 אטרקציה</option>
-                        <option value="🍽️ מסעדה">🍽️ מסעדה</option>
-                        <option value="📝 תזכורת">📝 משימה / תזכורת</option>
+                        <option value="🌴 פעילות/אטרקציה">🌴 פעילות/אטרקציה</option>
+                        <option value="🍽️ מסעדה/אוכל">🍽️ מסעדה/אוכל</option>
+                        <option value="🛍️ שופינג">🛍️ שופינג</option>
                     </select>
                 </div>
-                <div style="flex:1;">
-                    <input type="text" id="eventTime" placeholder="שעה (לדוגמה: 14:30)">
-                    <input type="text" id="eventLink" placeholder="קישור למיקום / מפה (רשות)">
-                    <button class="btn-main" onclick="addCustomEvent()">הוסף אירוע ליום זה</button>
+                <div>
+                    <label>שעה</label>
+                    <input type="text" id="eventTime" placeholder="למשל: 09:00">
+                </div>
+                <div>
+                    <label>קישור למפה (אופציונלי)</label>
+                    <input type="text" id="eventLink" placeholder="https://maps.google.com/...">
                 </div>
             </div>
+            <button class="action-btn" style="margin-top: 1rem;" onclick="addCustomEvent()">הוסף ללו"ז היומי</button>
+        </div>
+
+        <div style="margin-top: 2rem; background: #faf5ff; padding: 1.5rem; border-radius: 8px; border: 1px solid #f5d0fe;">
+            <h3 style="color: #86198f;">📄 מסמכים ואישורים משויכים לתאריך זה</h3>
+            <div id="dayDocumentsList" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 8px;"></div>
         </div>
     </div>
 
-    <!-- ATTRACTIONS TAB -->
+    <!-- אטרקציות ופעילויות -->
     <div id="attractions" class="section-block">
-        <h2 class="section-title" style="margin-top:0;">🎡 אטרקציות מומלצות בתאילנד</h2>
-        <div style="margin-bottom: 20px; display:flex; flex-wrap:wrap; gap:5px;" id="attrFilterButtons"></div>
-        <div id="attractionsListContainer" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px;"></div>
+        <h2>אטרקציות ופעילויות מומלצות</h2>
+        <div id="attrFilterButtons" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;"></div>
         
-        <div class="card-box" style="background: var(--card);">
-            <h3>➕ הוספת אטרקציה חדשה</h3>
-            <div class="flex-grid">
-                <div style="flex:1;">
-                    <input type="text" id="newAttrTitle" placeholder="שם האטרקציה">
+        <div id="attractionsListContainer" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+
+        <div style="margin-top: 2.5rem; background: #f8fafc; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+            <h3>➕ הוסף אטרקציה חדשה לרשימה</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                <div>
+                    <label>שם האטרקציה</label>
+                    <input type="text" id="newAttrTitle" placeholder="שם המקום">
+                </div>
+                <div>
+                    <label>אזור</label>
                     <select id="newAttrRegion"></select>
                 </div>
-                <div style="flex:1;">
-                    <input type="text" id="newAttrDesc" placeholder="תיאור קצר">
-                    <input type="text" id="newAttrWeb" placeholder="קישור לאתר הרשמי (URL)">
-                    <input type="text" id="newAttrMap" placeholder="קישור למיקום ב-Google Maps">
-                    <button class="btn-main" onclick="addCustomAttraction()">הוסף אטרקציה</button>
+                <div>
+                    <label>תיאור קצר</label>
+                    <input type="text" id="newAttrDesc" placeholder="מה יש לעשות שם?">
+                </div>
+                <div>
+                    <label>אתר רשמי (אופציונלי)</label>
+                    <input type="text" id="newAttrWeb" placeholder="https://...">
+                </div>
+                <div>
+                    <label>קישור מפה (אופציונלי)</label>
+                    <input type="text" id="newAttrMap" placeholder="https://maps.google.com/...">
                 </div>
             </div>
+            <button class="action-btn" style="margin-top: 1rem;" onclick="addCustomAttraction()">הוסף אטרקציה</button>
         </div>
     </div>
 
-    <!-- MAP TAB -->
+    <!-- מפות ואזורים -->
     <div id="map" class="section-block">
-        <h2 class="section-title" style="margin-top:0;">🗺️ מפת אטרקציות אינטראקטיבית</h2>
-        <div style="margin-bottom: 15px; display:flex; gap:10px;" id="mapRegionButtons"></div>
-        <div class="card-box" style="padding: 10px; margin-bottom: 20px;">
-            <div style="width: 100%; height: 400px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);">
-                <iframe id="googleMapIframe" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
+        <h2>מפות אזוריות ותכנון מסלול</h2>
+        <div id="mapRegionButtons" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;"></div>
+        
+        <h3 id="mapRegionTitle" style="color: var(--primary-dark);"></h3>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1.5rem;">
+            <iframe id="googleMapIframe" style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
-        <h3 style="margin-top:20px; color:var(--primary-dark);">📌 אטרקציות שסומנו (<span id="mapRegionTitle"></span>):</h3>
-        <div id="selectedAttractionsMapList" style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px;"></div>
+
+        <h3>אטרקציות שבחרת באזור זה (מסומנות לוויסות)</h3>
+        <div id="selectedAttractionsMapList" style="display: flex; flex-direction: column; gap: 8px; margin-top: 1rem;"></div>
     </div>
 
-    <!-- EXPENSES TAB -->
+    <!-- ניהול הוצאות -->
     <div id="expenses" class="section-block">
-        <h2 class="section-title" style="margin-top:0;">💰 מחשבון המרה ומעקב הוצאות משפחתי</h2>
-        <div class="flex-grid">
-            <div class="card-box">
-                <h3>💱 מחשבון המרה (<span id="currCodeLabel"></span> ➔ ILS)</h3>
-                <label>סכום במטבע מקומי (באט):</label>
-                <input type="number" id="localAmount" placeholder="0" oninput="convertCurrency()">
-                <label>שער חליפין (כמה באט ל-1 ₪):</label>
-                <input type="number" id="exchangeRate" step="0.1" oninput="convertCurrency()">
-                <h4 style="margin-top: 10px;">סה"כ בשקלים: <span id="ilsResult" style="color:var(--primary-dark);">0</span> ₪</h4>
+        <h2>ניהול הוצאות הטיול</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; background: #f8fafc; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 2rem;">
+            <div>
+                <h3>מחשבון המרה מהיר</h3>
+                <label>שער המרה (1 ₪ = כמה <span class="currCodeLabel">THB</span>?)</label>
+                <input type="number" id="exchangeRate" value="10" oninput="convertCurrency()">
+                <label>סכום ב-<span class="currCodeLabel">THB</span></label>
+                <input type="number" id="localAmount" placeholder="למשל: 500" oninput="convertCurrency()">
+                <p style="margin-top: 0.5rem; font-weight: bold; color: var(--primary-dark);">שווי בשקלים: <span id="ilsResult">0.00</span> ₪</p>
             </div>
-            <div class="card-box">
-                <h3>➕ הוספת הוצאה חדשה</h3>
-                <input type="date" id="expDate">
-                <input type="text" id="expDesc" placeholder="תיאור ההוצאה">
-                <input type="number" id="expCost" placeholder="סכום בבאט">
-                <select id="expCategory">
-                    <option value="אוכל">🍽️ אוכל</option>
-                    <option value="תחבורה">🚕 תחבורה</option>
-                    <option value="אטרקציות">🎟️ אטרקציות</option>
-                    <option value="קניות">🛍️ קניות</option>
-                    <option value="מלון">🏨 לינה</option>
-                </select>
-                <button class="btn-main" onclick="addExpense()">רשום הוצאה</button>
+            <div>
+                <h3>הוספת הוצאה חדשה</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <div><label>תאריך</label><input type="date" id="expDate"></div>
+                    <div><label>קטגוריה</label>
+                        <select id="expCategory">
+                            <option value="🏨 לינה">🏨 לינה</option>
+                            <option value="✈️ תחבורה">✈️ תחבורה</option>
+                            <option value="🍽️ אוכל ושתייה">🍽️ אוכל ושתייה</option>
+                            <option value="🌴 אטרקציות">🌴 אטרקציות</option>
+                            <option value="🛍️ שופינג">🛍️ שופינג</option>
+                            <option value="📦 שונות">📦 שונות</option>
+                        </select>
+                    </div>
+                </div>
+                <label>תיאור ההוצאה</label><input type="text" id="expDesc" placeholder="למשל: מסעדה משפחתית">
+                <label>סכום ב-<span class="currCodeLabel">THB</span></label><input type="number" id="expCost" placeholder="סכום">
+                <button class="action-btn" onclick="addExpense()">הוסף הוצאה</button>
             </div>
         </div>
-        <h3 style="margin-top:20px;">📊 פירוט הוצאות</h3>
-        <div class="table-container">
-            <table>
-                <thead><tr><th>תאריך</th><th>תיאור</th><th>קטגוריה</th><th id="thHeaderAmount">סכום</th><th>סכום (₪)</th><th>פעולות</th></tr></thead>
-                <tbody id="expensesTable"></tbody>
-            </table>
+
+        <h3>פירוט כל ההוצאות</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>תאריך</th>
+                    <th>תיאור</th>
+                    <th>קטגוריה</th>
+                    <th id="thHeaderAmount">סכום</th>
+                    <th>שווה בשקלים</th>
+                    <th>פעולות</th>
+                </tr>
+            </thead>
+            <tbody id="expensesTable"></tbody>
+        </table>
+        <div style="margin-top: 1rem; font-size: 1.1rem; font-weight: bold; text-align: left;">
+            סה"כ הוצאות: <span id="totalExpensesLocal" style="color: var(--primary);">0 THB</span> | <span id="totalExpensesILS" style="color: var(--primary-dark);">0.00</span> ₪
         </div>
-        <h4 style="text-align: left; margin-top: 10px;">
-            סה"כ הוצאות: <span id="totalExpensesLocal" style="color:var(--accent);">0</span> | סה"כ בשקלים: <span id="totalExpensesILS" style="color:var(--primary);">0</span> ₪
-        </h4>
     </div>
 
-    <!-- DOCUMENTS TAB -->
+    <!-- מסמכים ואישורים -->
     <div id="documents" class="section-block">
-        <h2 class="section-title" style="margin-top:0;">📁 מסמכים, קבלות ואישורי מלונות</h2>
-        <div class="card-box" style="background: var(--card); margin-bottom: 20px;">
-            <h3>➕ העלאת קובץ חדש לענן</h3>
-            <div class="flex-grid">
-                <div style="flex:1;">
-                    <input type="text" id="docDesc" placeholder="תיאור המסמך (למשל: מלון פוקט / כרטיס טיסה)">
+        <h2>מסמכים, אישורים וכרטיסי טיסה</h2>
+        <p>העלה לכאן אישורי מלונות, כרטיסי טיסה, ביטוחים וקבלות לסנכרון ענן מלא.</p>
+
+        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 2rem;">
+            <h3>📤 העלאת מסמך חדש</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                <div>
+                    <label>בחר קובץ</label>
+                    <input type="file" id="fileInput" style="padding: 0.3rem;">
+                </div>
+                <div>
+                    <label>קטגוריה</label>
                     <select id="docCategory">
                         <option value="🏨 אישור מלון">🏨 אישור מלון</option>
                         <option value="✈️ כרטיס טיסה">✈️ כרטיס טיסה</option>
-                        <option value="🧾 קבלה">🧾 קבלה / חשבונית</option>
-                        <option value="🎫 כרטיס אטרקציה">🎫 כרטיס אטרקציה</option>
+                        <option value="🛡️ ביטוח נסיעות">🛡️ ביטוח נסיעות</option>
+                        <option value="🎫 אטרקציה/כרטיסים">🎫 אטרקציה/כרטיסים</option>
+                        <option value="🧾 קבלה/חשבונית">🧾 קבלה/חשבונית</option>
                         <option value="📄 מסמך אחר">📄 מסמך אחר</option>
                     </select>
                 </div>
-                <div style="flex:1;">
-                    <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 2px;">תאריך רלוונטי לטיול (לסנכרון בלו"ז):</label>
-                    <input type="date" id="docDate" style="padding: 6px;">
-                    <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 2px;">בחר קובץ (תמונה / PDF):</label>
-                    <input type="file" id="fileInput" accept="image/*,application/pdf" style="padding: 6px;">
-                    <button class="btn-main" id="uploadDocBtn" onclick="uploadDocument()">העלה קובץ לענן ☁️</button>
+                <div>
+                    <label>תאריך רלוונטי (אופציונלי)</label>
+                    <input type="date" id="docDate">
+                </div>
+                <div>
+                    <label>תיאור המסמך</label>
+                    <input type="text" id="docDesc" placeholder="למשל: אישור הזמנת מלון בפוקט">
                 </div>
             </div>
-            <div id="uploadProgress" style="font-size: 0.9rem; color: var(--primary); font-weight: bold; margin-top: 5px; display: none;">מעלה קובץ, נא להמתין...</div>
+            <button class="action-btn" style="margin-top: 1rem;" onclick="uploadDocument()">העלה קובץ לענן</button>
+            <div id="uploadProgress" style="display:none; margin-top: 1rem; color: var(--primary); font-weight: bold;">מעלה קובץ לענן, אנא המתן...</div>
         </div>
 
-        <h3 style="margin-top:20px;">📂 רשימת המסמכים והקבלות שהועלו</h3>
-        <div class="table-container">
-            <table>
-                <thead><tr><th>תאריך יעד</th><th>תיאור</th><th>קטגוריה</th><th>מעלה</th><th>קובץ / צפייה</th><th>פעולות</th></tr></thead>
-                <tbody id="documentsTableBody"></tbody>
-            </table>
+        <h3>מסמכים שהועלו</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>תאריך יעד</th>
+                    <th>תיאור</th>
+                    <th>קטגוריה</th>
+                    <th>הועלה ע"י</th>
+                    <th>קישור</th>
+                    <th>פעולות</th>
+                </tr>
+            </thead>
+            <tbody id="documentsTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- רשימת ציוד -->
+    <div id="packing" class="section-block">
+        <h2>רשימת ציוד ומזוודות</h2>
+        <div id="packingPersonsButtons" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;"></div>
+        
+        <h3 id="personTitle" style="color: var(--primary-dark);"></h3>
+        <div id="personalPackingContainer" style="display: flex; flex-direction: column; gap: 8px; margin-top: 1rem;"></div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 10px;">
+            <input type="text" id="newPackingItem" placeholder="הוסף פריט חדש לרשימה..." style="margin:0;">
+            <button class="action-btn" onclick="addPackingItem()" style="white-space: nowrap;">הוסף פריט</button>
         </div>
     </div>
 
-    <!-- PACKING TAB -->
-    <div id="packing" class="section-block">
-        <h2 class="section-title" style="margin-top:0;">🧳 רשימת ציוד אישית ומשפחתית</h2>
-        <div style="margin-bottom: 20px; display:flex; flex-wrap:wrap; gap:5px;" id="packingPersonsButtons"></div>
-        <div class="card-box" style="margin-bottom: 20px; background: var(--card);">
-            <h3>הוספת פריט עבור <span id="personTitle" style="color:var(--primary);"></span></h3>
-            <div style="display:flex; gap:10px;">
-                <input type="text" id="newPackingItem" placeholder="שם הפריט להוספה">
-                <button class="btn-main" style="width: auto; white-space: nowrap; margin-bottom:12px;" onclick="addPackingItem()">הוסף פריט</button>
+    <!-- באקט ליסט -->
+    <div id="bucket" class="section-block">
+        <h2>באקט ליסט משפחתי (חלומות ומשאלות לטיול)</h2>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 1.5rem; flex-wrap: wrap; background: #f8fafc; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="flex: 1; min-width: 150px;">
+                <label>שם בני המשפחה</label>
+                <input type="text" id="bucketPerson" placeholder="שם">
+            </div>
+            <div style="flex: 2; min-width: 250px;">
+                <label>המשאלה או החוויה שרוצים לעשות</label>
+                <input type="text" id="bucketWish" placeholder="למשל: ללטף פיל / לאכול פאד תאי בשוק רחוב">
+            </div>
+            <div style="display: flex; align-items: flex-end;">
+                <button class="action-btn" onclick="addBucketItem()" style="height: 42px;">הוסף לבאקט ליסט</button>
             </div>
         </div>
-        <div id="personalPackingContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px;"></div>
-    </div>
 
-    <!-- BUCKET LIST TAB -->
-    <div id="bucket" class="section-block">
-        <h2 class="section-title" style="margin-top:0;">⭐ "יעדים חייבים" – רשימת החלומות של המשפחה</h2>
-        <div class="card-box">
-            <input type="text" id="bucketPerson" placeholder="שם בן משפחה">
-            <input type="text" id="bucketWish" placeholder="הפעילות / המקום שתרצו לבקר">
-            <button class="btn-main" onclick="addBucketItem()">הוסף לרשימה</button>
-        </div>
-        <div class="table-container" style="margin-top:20px;">
-            <table>
-                <thead><tr><th>בן משפחה</th><th>משאלה / יעד</th><th style="width: 80px;">מחיקה</th></tr></thead>
-                <tbody id="bucketListTable"></tbody>
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>מי מבקש</th>
+                    <th>המשאלה / החוויה</th>
+                    <th>פעולות</th>
+                </tr>
+            </thead>
+            <tbody id="bucketListTable"></tbody>
+        </table>
     </div>
-  </div>
+</main>
+
+<footer id="footerContainer" style="text-align: center; padding: 2rem; background: #1e293b; color: white; margin-top: 3rem;"></footer>
+
+<!-- מודל בחירת משתמש במכשיר -->
+<div id="userModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>מי משתמש במכשיר זה כעת?</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">בחר את שמך כדי שנדע מי מוסיף רשמים ומסמכים:</p>
+        <div id="modalUsersList"></div>
+    </div>
+</div>
 
 <script type="module">
-// ==========================================
-// 🌴 FIREBASE & THAILAND TRIP CONFIGURATION
-// ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js";
@@ -390,7 +530,7 @@ const TRIP_CONFIG = {
     ],
     footerContacts: `
         <h3>אנשי קשר וחירום בתאילנד</h3>
-        <p><strong>חירום כללי בתאילנד:</strong> <a href="tel:1155">1155</a> | <strong>שגרירות ישראל בבנגקוק:</strong> <a href="tel:+6622049200">+66 2 204 9200</a></p>
+        <p><strong>חירום כללי בתאילנד:</strong> <a href="tel:1155" style="color:var(--accent);">1155</a> | <strong>שגרירות ישראל בבנגקוק:</strong> <a href="tel:+6622049200" style="color:var(--accent);">+66 2 204 9200</a></p>
     `,
     attractions: [
         { id: 1, title: "איי פי פי (Phi Phi Islands)", region: "פוקט והאיים", desc: "שייט עוצר נשימה בין צוקי גיר ומים צלולים.", web: "", map: "https://maps.google.com/?q=Phi+Phi+Islands" },
@@ -443,7 +583,6 @@ function syncToCloud() {
     setDoc(docRef, payload).catch(err => console.error("Sync error:", err));
 }
 
-// האזנה לשינויים בזמן אמת מ-Firebase
 onSnapshot(docRef, (docSnap) => {
     if (docSnap.exists()) {
         const data = docSnap.data();
@@ -482,7 +621,7 @@ function init() {
     document.getElementById('heroSubtitle').innerText = TRIP_CONFIG.meta.heroSubtitle;
     document.getElementById('heroBadge').innerText = TRIP_CONFIG.meta.badge;
     document.getElementById('footerContainer').innerHTML = TRIP_CONFIG.footerContacts;
-    document.getElementById('currCodeLabel').innerText = TRIP_CONFIG.currency.code;
+    document.querySelectorAll('.currCodeLabel').forEach(el => el.innerText = TRIP_CONFIG.currency.code);
     document.getElementById('thHeaderAmount').innerText = `סכום (${TRIP_CONFIG.currency.code})`;
     document.getElementById('exchangeRate').value = TRIP_CONFIG.currency.defaultRate;
 
@@ -533,9 +672,43 @@ function init() {
     }
 
     document.getElementById('expDate').value = new Date().toISOString().split('T')[0];
-    const todayStr = new Date().toISOString().split('T')[0];
-    const docDateInput = document.getElementById('docDate');
-    if (docDateInput) docDateInput.value = todayStr;
+
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const fileName = file.name;
+            
+            if (fileName.includes('מלון') || fileName.toLowerCase().includes('hotel')) {
+                document.getElementById('docCategory').value = '🏨 אישור מלון';
+            } else if (fileName.includes('טיסה') || fileName.toLowerCase().includes('flight')) {
+                document.getElementById('docCategory').value = '✈️ כרטיס טיסה';
+            } else if (fileName.includes('קבלה') || fileName.toLowerCase().includes('receipt')) {
+                document.getElementById('docCategory').value = '🧾 קבלה';
+            }
+
+            const dateRegex = /(\d{2}[-./]\d{2}[-./]\d{2,4})|(\d{4}[-./]\d{2}[-./]\d{2})/;
+            const match = fileName.match(dateRegex);
+            if (match) {
+                let rawDate = match[0].replace(/[-/]/g, '.');
+                let parts = rawDate.split('.');
+                if (parts.length === 3) {
+                    let day = parts[0];
+                    let month = parts[1];
+                    let year = parts[2].length === 2 ? '20' + parts[2] : parts[2];
+                    if (year.length === 4 && day.length === 2 && month.length === 2) {
+                        document.getElementById('docDate').value = `${year}-${month}-${day}`;
+                    }
+                }
+            }
+
+            let cleanDesc = fileName.replace(/\.[^/.]+$/, "").replace(dateRegex, '').replace(/[-_]/g, ' ').trim();
+            if (cleanDesc) {
+                document.getElementById('docDesc').value = cleanDesc;
+            }
+        });
+    }
 
     renderQuickInfo();
     renderQuickChecklist();
@@ -576,12 +749,10 @@ function renderQuickInfo() {
     if (!quickInfoBody) return;
     quickInfoBody.innerHTML = '';
     
-    // בסיס קבוע
     TRIP_CONFIG.quickInfo.forEach(row => {
         quickInfoBody.innerHTML += `<tr><td><strong>${row.topic}</strong></td><td>${row.details}</td><td>${row.notes}</td></tr>`;
     });
 
-    // הוספה דינמית של מלונות וטיסות מתוך המסמכים שהועלו
     tripDocuments.forEach(doc => {
         if (doc.category === '🏨 אישור מלון' || doc.category === '✈️ כרטיס טיסה') {
             const dateStr = doc.docDate ? ` (תאריך: ${doc.docDate})` : '';
@@ -653,7 +824,6 @@ function renderDayDocuments() {
     if (!container) return;
     container.innerHTML = '';
 
-    // המרת selectedDate מתבנית DD.MM.YY ל-YYYY-MM-DD לשם השוואה מול התאריך שנבחר בהעלאה
     const parts = selectedDate.split('.');
     const isoDateFormatted = `20${parts[2]}-${parts[1]}-${parts[0]}`;
 
@@ -848,9 +1018,6 @@ function renderExpenses() {
     document.getElementById('totalExpensesILS').innerText = totalILS.toFixed(2);
 }
 
-// ==========================================
-// 📁 DOCUMENTS & UPLOADS FUNCTIONS
-// ==========================================
 async function uploadDocument() {
     const fileInput = document.getElementById('fileInput');
     const descInput = document.getElementById('docDesc');
@@ -970,10 +1137,9 @@ function togglePacking(key) {
 }
 function addPackingItem() {
     const val = document.getElementById('newPackingItem').value.trim();
-    const currentVal = val;
-    if (!currentVal) return;
+    if (!val) return;
     if (!personalPacking[currentPerson]) personalPacking[currentPerson] = [];
-    personalPacking[currentPerson].push(currentVal);
+    personalPacking[currentPerson].push(val);
     localStorage.setItem(TRIP_CONFIG.storageKeyPrefix + 'packing', JSON.stringify(personalPacking));
     syncToCloud();
     document.getElementById('newPackingItem').value = '';
@@ -1031,6 +1197,34 @@ function renderBucket() {
         table.innerHTML += `<tr><td><strong>${i.person}</strong></td><td>${i.wish}</td><td><button class="btn-danger" onclick="deleteBucketItem(${idx})">מחיקה</button></td></tr>`;
     });
 }
+
+// חיבור הפונקציות ל-Window
+window.showTab = showTab;
+window.openUserModal = openUserModal;
+window.setDeviceUser = setDeviceUser;
+window.toggleQuickChecklist = toggleQuickChecklist;
+window.addJournalEntry = addJournalEntry;
+window.deleteJournalEntry = deleteJournalEntry;
+window.addCustomEvent = addCustomEvent;
+window.deleteEvent = deleteEvent;
+window.switchAttrFilter = switchAttrFilter;
+window.toggleAttrSelection = toggleAttrSelection;
+window.addCustomAttraction = addCustomAttraction;
+window.deleteAttraction = deleteAttraction;
+window.switchMapRegion = switchMapRegion;
+window.convertCurrency = convertCurrency;
+window.addExpense = addExpense;
+window.deleteExpense = deleteExpense;
+window.uploadDocument = uploadDocument;
+window.deleteDocument = deleteDocument;
+window.switchPerson = switchPerson;
+window.togglePacking = togglePacking;
+window.addPackingItem = addPackingItem;
+window.editPackingItem = editPackingItem;
+window.movePackingItem = movePackingItem;
+window.deletePackingItem = deletePackingItem;
+window.addBucketItem = addBucketItem;
+window.deleteBucketItem = deleteBucketItem;
 
 window.onload = init;
 </script>
