@@ -315,6 +315,19 @@
         <h2 class="section-title">ציוד וארגון מוקדם</h2>
         <div class="checklist-grid" id="quickChecklistGrid"></div>
 
+        <!-- NEW: Backup & Restore Section -->
+        <div class="card-box" style="margin-top: 25px; background: #e0f2fe; border-color: var(--primary);">
+            <h3 style="color: var(--primary-dark); margin-bottom: 8px;">💾 גיבוי ושחזור נתונים (ענן / קובץ מקומי)</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">שמור גיבוי מלא של כל נתוני הטיול, ההוצאות ויומן המסע לקובץ, או טען קובץ גיבוי קיים.</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn-main" style="width: auto;" onclick="exportDataAsJSON()">📥 הורד גיבוי נתונים (JSON)</button>
+                <label class="btn-main" style="width: auto; margin:0; display: inline-flex; align-items: center; cursor: pointer; background: var(--accent); color: #000;">
+                    📤 טען קובץ גיבוי
+                    <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importDataFromJSON(event)">
+                </label>
+            </div>
+        </div>
+
         <footer class="footer">
           <h3>אנשי קשר וקישורים חיוניים</h3>
           <p><strong>שגרירות ישראל בבנגקוק:</strong> <a href="tel:+6622049200">+66-2-2049200</a></p>
@@ -633,14 +646,24 @@ const quickChecklistItems = [
     "מטענים וממתאמי שקע לתאילנד"
 ];
 
-// Default States
+// Default States & Fully Synchronized Schedule for all days
 let preflightStates = {};
 let defaultSchedule = {
     "09.11.26": { title: "הכנות אחרונות ואריזות", events: [] },
     "10.11.26": { title: "טיסה לפוקט (דרך אבו דאבי)", events: [{ title: "טיסה EY610 מנתב\"ג ב-06:20 ➔ אבו דאבי ➔ EY414 לפוקט (נחיתה 23:50)", type: "✈️ טיסה", time: "06:20", link: "" }] },
-    "11.11.26": { title: "פוקט - התארגנות ומנוחה", events: [{ title: "צ'ק אין למלון והתרעננות", type: "🏨 מלון", time: "01:00", link: "" }] },
-    "13.11.26": { title: "פוקט - ערב שבת", events: [{ title: "ארוחת שישי בבית חב\"ד פוקט", type: "🍽️ מסעדה", time: "18:30", link: "https://maps.google.com/?q=Chabad+House+Phuket" }] },
-    "22.11.26": { title: "מעבר לבנגקוק", events: [{ title: "טיסת פנים TG206 מפוקט (11:50) לבנגקוק BKK (13:20)", type: "✈️ טיסה", time: "11:50", link: "" }] },
+    "11.11.26": { title: "פוקט - התארגנות ומנוחה", events: [{ title: "צ'ק אין למלון והתרעננות", type: "🏨 מלון", time: "14:00", link: "" }, { title: "סיור ערב רגוע בסביבת המלון", type: "🎡 אטרקציה", time: "18:00", link: "" }] },
+    "12.11.26": { title: "פוקט - יום חוף וספורט ימי", events: [{ title: "פעילות ספורט ימי (אופנועי ים, מצנח רחיפה) בחוף", type: "🎡 אטרקציה", time: "10:00", link: "" }, { title: "סיור ערב באזור הפטונג ושוק הלילה", type: "🍽️ מסעדה", time: "19:00", link: "" }] },
+    "13.11.26": { title: "פוקט - ערב שבת", events: [{ title: "הכנות לשבת וטיול קל באזור", type: "📝 תזכורת", time: "14:00", link: "" }, { title: "ארוחת ליל שבת בבית חב\"ד פוקט", type: "🍽️ מסעדה", time: "18:30", link: "https://maps.google.com/?q=Chabad+House+Phuket" }] },
+    "14.11.26": { title: "פוקט - שבת מנוחה", events: [{ title: "יום מנוחה משפחתי ובילוי בריכה וחוף", type: "🏨 מלון", time: "10:00", link: "" }, { title: "יציאה לטיול מוצאי שבת", type: "🎡 אטרקציה", time: "20:00", link: "" }] },
+    "15.11.26": { title: "פוקט - שייט איי פיפי", events: [{ title: "שייט יומי לשמורת איי פיפי ושנורקלינג בלגונות המדהימות", type: "🎡 אטרקציה", time: "08:30", link: "https://maps.google.com/?q=Phi+Phi+Islands" }] },
+    "16.11.26": { title: "פוקט - פארק מים Andamanda", events: [{ title: "בילוי משפחתי בפארק המים הענק Andamanda Phuket", type: "🎡 אטרקציה", time: "10:00", link: "https://maps.google.com/?q=Andamanda+Phuket" }] },
+    "17.11.26": { title: "פוקט - טרקטורונים בג'ונגל", events: [{ title: "טיול טרקטורונים (ATV) ואקסטרים בג'ונגל של פוקט", type: "🎡 אטרקציה", time: "09:30", link: "" }] },
+    "18.11.26": { title: "פוקט - שמורת פילים אתית", events: [{ title: "ביקור משפחתי בשמורת פילים אתית (האבסה ורחיצה ללא רכיבה)", type: "🎡 אטרקציה", time: "09:00", link: "https://maps.google.com/?q=Phuket+Elephant+Sanctuary" }] },
+    "19.11.26": { title: "פוקט - שופינג ומרכז קניות", events: [{ title: "סיור וקניות ב-Central Phuket ובאקווריום הענק Aquaria", type: "🎡 אטרקציה", time: "11:00", link: "https://maps.google.com/?q=Central+Phuket" }] },
+    "20.11.26": { title: "פוקט - יום נופש ופינוקים", events: [{ title: "יום חוף, מנוחה ועיסויים תאילנדיים משפחתיים", type: "🎡 אטרקציה", time: "10:00", link: "" }] },
+    "21.11.26": { title: "פוקט - קניות אחרונות והיערכות", events: [{ title: "קניות אחרונות בפוקט ואריזת מזוודות לקראת בנגקוק", type: "📝 תזכורת", time: "16:00", link: "" }] },
+    "22.11.26": { title: "מעבר לבנגקוק", events: [{ title: "טיסת פנים TG206 מפוקט (11:50) לבנגקוק BKK (13:20)", type: "✈️ טיסה", time: "11:50", link: "" }, { title: "צ'ק-אין במלון בבנגקוק ויציאה לבר רופטופ לשקיעה", type: "🏨 מלון", time: "16:00", link: "" }] },
+    "23.11.26": { title: "בנגקוק - שופינג ואטרקציות מרכזיות", events: [{ title: "סיור קניות במתחמי MBK, Siam Paragon ו-ICONSIAM", type: "🎡 אטרקציה", time: "10:00", link: "https://maps.google.com/?q=ICONSIAM" }, { title: "בילוי לילי בשוק הלילה Jodd Fairs", type: "🍽️ מסעדה", time: "19:00", link: "https://maps.google.com/?q=Jodd+Fairs" }] },
     "24.11.26": { title: "חזרה לישראל", events: [{ title: "טיסה EY405 מבנגקוק ב-14:40 ➔ אבו דאבי ➔ EY599 לנחיתה בנתב\"ג ב-23:40", type: "✈️ טיסה", time: "14:40", link: "" }] }
 };
 
@@ -673,32 +696,65 @@ let expenses = [];
 let bucketItems = [];
 let importantDocs = [];
 
-// Sync functions with Firestore
+// Sync functions with Firebase & LocalStorage fallback
 async function loadDataFromFirebase() {
+    // First, load from localStorage for instant offline render
+    try {
+        const localData = localStorage.getItem('thailand_trip_offline_cache');
+        if (localData) {
+            parseAppData(JSON.parse(localData));
+        }
+    } catch(e) {
+        console.error("Error loading local storage cache:", e);
+    }
+
+    // Then, fetch from Firebase
     try {
         const docRef = doc(db, "trips", "thailand2026");
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             const data = docSnap.data();
-            preflightStates = data.preflightStates || preflightStates;
-            defaultSchedule = data.defaultSchedule || defaultSchedule;
-            dailyJournals = data.dailyJournals || dailyJournals;
-            attractionsList = data.attractionsList || attractionsList;
-            attractionSelections = data.attractionSelections || attractionSelections;
-            personalPacking = data.personalPacking || personalPacking;
-            packingStates = data.packingStates || packingStates;
-            expenses = data.expenses || expenses;
-            bucketItems = data.bucketItems || bucketItems;
-            importantDocs = data.importantDocs || importantDocs;
+            parseAppData(data);
+            saveToLocalStorage(); // update local cache
         } else {
             await saveDataToFirebase();
         }
     } catch (e) {
-        console.error("Error loading data from Firebase:", e);
+        console.warn("Firebase offline or unreachable, using local cache.", e);
     }
 }
 
+function parseAppData(data) {
+    preflightStates = data.preflightStates || preflightStates;
+    defaultSchedule = data.defaultSchedule || defaultSchedule;
+    dailyJournals = data.dailyJournals || dailyJournals;
+    attractionsList = data.attractionsList || attractionsList;
+    attractionSelections = data.attractionSelections || attractionSelections;
+    personalPacking = data.personalPacking || personalPacking;
+    packingStates = data.packingStates || packingStates;
+    expenses = data.expenses || expenses;
+    bucketItems = data.bucketItems || bucketItems;
+    importantDocs = data.importantDocs || importantDocs;
+}
+
+function saveToLocalStorage() {
+    const payload = {
+        preflightStates,
+        defaultSchedule,
+        dailyJournals,
+        attractionsList,
+        attractionSelections,
+        personalPacking,
+        packingStates,
+        expenses,
+        bucketItems,
+        importantDocs
+    };
+    localStorage.setItem('thailand_trip_offline_cache', JSON.stringify(payload));
+}
+
 async function saveDataToFirebase() {
+    saveToLocalStorage();
     try {
         await setDoc(doc(db, "trips", "thailand2026"), {
             preflightStates,
@@ -713,9 +769,52 @@ async function saveDataToFirebase() {
             importantDocs
         });
     } catch (e) {
-        console.error("Error saving data to Firebase:", e);
+        console.error("Error saving data to Firebase (saved locally):", e);
     }
 }
+
+// Backup & Restore JSON functions
+function exportDataAsJSON() {
+    const payload = {
+        preflightStates,
+        defaultSchedule,
+        dailyJournals,
+        attractionsList,
+        attractionSelections,
+        personalPacking,
+        packingStates,
+        expenses,
+        bucketItems,
+        importantDocs
+    };
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "thailand_trip_backup_2026.json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+}
+window.exportDataAsJSON = exportDataAsJSON;
+
+function importDataFromJSON(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async function(e) {
+        try {
+            const imported = JSON.parse(e.target.result);
+            parseAppData(imported);
+            await saveDataToFirebase();
+            alert("✅ הנתונים שחוברו ונוטעו בהצלחה!");
+            location.reload();
+        } catch (err) {
+            alert("❌ שגיאה בקריאת קובץ הגיבוי: " + err.message);
+        }
+    };
+    reader.readAsText(file);
+}
+window.importDataFromJSON = importDataFromJSON;
 
 function updateCountdown() {
     const targetDate = new Date('2026-11-10T06:20:00');
@@ -743,7 +842,7 @@ async function init() {
         updateDeviceUserDisplay();
     }
     updateCountdown();
-    setInterval(updateCountdown, 1000 * 60 * 60); // update every hour
+    setInterval(updateCountdown, 1000 * 60 * 60);
 
     document.getElementById('expDate').value = new Date().toISOString().split('T')[0];
     document.getElementById('docStartDate').value = new Date().toISOString().split('T')[0];
@@ -1269,7 +1368,7 @@ window.toggleDocTypeFields = toggleDocTypeFields;
 
 function formatDateToAppFormat(dateStr) {
     if (!dateStr) return "";
-    const parts = dateStr.split('-'); // YYYY-MM-DD
+    const parts = dateStr.split('-');
     if (parts.length === 3) {
         return `${parts[2]}.${parts[1]}.${parts[0].slice(2)}`;
     }
@@ -1296,7 +1395,6 @@ function processSmartDocument() {
         renderExpenses();
         alert('✅ ההוצאה נוספה בהצלחה ונקלטה בטאב ההוצאות!');
     } else {
-        // Attraction or Hotel
         const startDateVal = document.getElementById('docStartDate').value;
         const region = document.getElementById('docRegion').value;
         const link = document.getElementById('docLink').value.trim();
@@ -1305,12 +1403,10 @@ function processSmartDocument() {
 
         const formattedDate = formatDateToAppFormat(startDateVal);
 
-        // Add to attractions list as well
         const newId = Date.now();
         attractionsList.push({ id: newId, title, region, desc: notes || (type === 'hotel' ? 'מלון / לינה' : 'אטרקציה חדשה'), web: link, map: link });
-        attractionSelections[newId] = true; // Auto select for map
+        attractionSelections[newId] = true;
 
-        // Add to schedule
         if (!defaultSchedule[formattedDate]) {
             defaultSchedule[formattedDate] = { title: type === 'hotel' ? 'הגעה למלון' : 'פעילות / אטרקציה', events: [] };
         }
