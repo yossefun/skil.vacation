@@ -30,9 +30,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .user-banner button { background: var(--accent); border: none; padding: 4px 10px; border-radius: 6px; font-weight: bold; cursor: pointer; width: auto; margin: 0; font-size: 0.85rem; color: #000; }
+    .countdown-badge { background: #0284c7; color: white; padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 0.85rem; }
 
     /* Hero Section */
     .hero {
@@ -182,9 +185,10 @@
 </head>
 <body>
 
-  <!-- Device User Banner -->
+  <!-- Device User & Countdown Banner -->
   <div class="user-banner">
     <div>👤 מכשיר זה מזוהה עבור: <strong id="currentDeviceUserLabel">לא הוגדר</strong></div>
+    <div id="countdownDisplay" class="countdown-badge">⏳ ספירה לאחור: טוען...</div>
     <button onclick="openUserModal()">החלף משתמש במכשיר</button>
   </div>
 
@@ -713,6 +717,24 @@ async function saveDataToFirebase() {
     }
 }
 
+function updateCountdown() {
+    const targetDate = new Date('2026-11-10T06:20:00');
+    const now = new Date();
+    const diffTime = targetDate - now;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    const countdownEl = document.getElementById('countdownDisplay');
+    if (countdownEl) {
+        if (diffDays > 0) {
+            countdownEl.innerText = `⏳ עוד ${diffDays} ימים ליציאה!`;
+        } else if (diffDays === 0) {
+            countdownEl.innerText = `🎉 היום היציאה לחופשה!`;
+        } else {
+            countdownEl.innerText = `✈️ החופשה בעיצומה / הסתיימה`;
+        }
+    }
+}
+
 async function init() {
     await loadDataFromFirebase();
     if (!deviceUser) {
@@ -720,6 +742,9 @@ async function init() {
     } else {
         updateDeviceUserDisplay();
     }
+    updateCountdown();
+    setInterval(updateCountdown, 1000 * 60 * 60); // update every hour
+
     document.getElementById('expDate').value = new Date().toISOString().split('T')[0];
     document.getElementById('docStartDate').value = new Date().toISOString().split('T')[0];
     renderQuickChecklist();
